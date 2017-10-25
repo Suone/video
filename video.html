@@ -1,0 +1,73 @@
+<!DOCTYPE HTML>
+<html>
+
+	<head>
+		<title>Video.js Test Suite</title>
+		<link rel="stylesheet" href="css/video-js.css" />
+		<script src="js/video.min.js"></script>
+		<script src="js/Youtube.min.js"></script>
+	</head>
+	<style>
+		.video-main {
+			width: 100%;
+			height: auto;
+			display: flex;
+			justify-content: center;
+		}
+	</style>
+
+	<body>
+		<div class="video-main">
+			<video id="my-video1" class="video-js" data-setup='{}'>
+			</video>
+		</div>
+		<div class="video-main">
+			<video id="my-video2" class="video-js" width="800" height="400" controls data-setup='{ }'>
+			</video>
+		</div>
+
+		<script>
+			var dt = [{
+				"techOrder": "['youtube']",
+				"sources": "[{ 'type': 'video/youtube', 'src': 'https://youtu.be/metXgg5YSgQ'}]"
+			}, {
+				"techOrder": "html5",
+				"sources": "[{'src': 'http://cdn-v.animesama.com/ugc/2017/8/9/v6nly2h059p83ctv.mp4','type': 'video/mp4'}]"
+			}];
+			/*这是自己的视频*/
+			var player = videojs('my-video1', {
+				techOrder: [dt[1].techOrder] /*dt[1].techOrder*/ ,
+				width: 800, //宽string|number
+				height: 400, //高：string|number
+				controls: true, //控制条：boolean
+				preload: "auto", //预加载：string；'auto'|'true'|'metadata'|'none'
+				poster: '//vjs.zencdn.net/v/oceans.png', //预览图：string
+				autoplay: false, //自动播放：boolean
+				loop: false, //循环：boolean
+				muted: false, //静音：boolean
+				//	         techOrder:'',
+				"sources": /*[{"src": "http://cdn-v.animesama.com/ugc/2017/8/9/v6nly2h059p83ctv.mp4","type": "video/mp4"}]*/ [{
+					'src': 'http://cdn-v.animesama.com/ugc/2017/8/9/v6nly2h059p83ctv.mp4',
+					'type': 'video/mp4'
+				}]
+			});
+			/*这是YouTube的视频*/
+			var player2 = videojs('my-video2', {
+				width: 800, //宽string|number
+				height: 400, //高：string|number
+				controls: true, //控制条：boolean
+				preload: "auto", //预加载：string；'auto'|'true'|'metadata'|'none'
+				poster: '//vjs.zencdn.net/v/oceans.png', //预览图：string
+				autoplay: false, //自动播放：boolean
+				loop: false, //循环：boolean
+				muted: false, //静音：boolean
+				techOrder: ['youtube'],
+				sources: [{
+					"type": "video/youtube",
+					"src": "https://youtu.be/metXgg5YSgQ"
+				}]
+			});
+		</script>
+	</body>
+
+</html>
